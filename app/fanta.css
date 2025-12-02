@@ -150,7 +150,8 @@ h5,
 h6,
 button {
   /* font-family: "Grenze", serif; */
-  font-family: "Roboto Slab", serif;
+  /* font-family: "Roboto Slab", serif; */
+  font-family: "Archivo", sans-serif;
   width: fit-content;
 }
 
