@@ -3,10 +3,19 @@ import { useAuth } from '@/context/AuthContext';
 import { useState } from 'react';
 
 export default function SubscriptionForm(props) {
-  const { onSubmit, closeInput, formData, handleChangeInput, handleResetForm } =
-    props;
+  const {
+    onSubmit,
+    closeInput,
+    formData,
+    handleChangeInput,
+    handleResetForm,
+    editingIndex,
+    setEditingIndex,
+    isEditing,
+  } = props;
 
-  const { handleAddSubscription } = useAuth();
+  const { handleAddSubscription, userData, handleUpdateSubscription } =
+    useAuth();
 
   // Move the followings to app/dashboard/page.js
   // const [formData, setFormData] = useState({
@@ -17,7 +26,7 @@ export default function SubscriptionForm(props) {
   //   billingFrequency: 'Monthly',
   //   nextBillingData: '',
   //   paymentMethod: 'Credit Card',
-  //   stateDate: '',
+  //   startDate: '',
   //   renewalType: '',
   //   notes: '',
   //   status: 'Active',
@@ -32,14 +41,22 @@ export default function SubscriptionForm(props) {
   function handleFormSubmit(e) {
     e.preventDefault();
     // onSubmit();
-    handleAddSubscription(formData);
+
+    // handleAddSubscription(formData);
+
+    if (editingIndex !== null) {
+      handleUpdateSubscription(editingIndex, formData);
+    } else {
+      handleAddSubscription(formData);
+    }
+
     handleResetForm();
     closeInput();
   }
 
   return (
     <section>
-      <h2>Add a new subscription</h2>
+      <h2>{isEditing ? 'Edit subscription' : 'Add a new subscription'}</h2>
       <form onSubmit={handleFormSubmit}>
         <label>
           <span>Subscription Name</span>
@@ -62,10 +79,11 @@ export default function SubscriptionForm(props) {
           >
             {[
               'Entertainment',
-              'Music',
               'Software',
-              'Web Services',
+              'Shopping',
+              'News',
               'Health & Fitness',
+              'Education',
               'Other',
             ].map((cat, catIndex) => {
               return <option key={catIndex}>{cat}</option>;
@@ -136,7 +154,7 @@ export default function SubscriptionForm(props) {
         <label>
           <span>Subscription Start Date</span>
           <input
-            value={formData.stateDate}
+            value={formData.startDate}
             onChange={handleChangeInput}
             type="date"
             name="startDate"
@@ -168,8 +186,18 @@ export default function SubscriptionForm(props) {
         </label>
 
         <div className="fat-column form-submit-btns">
-          <button onClick={closeInput}>Cancel</button>
-          <button type="submit">Add Subscription</button>
+          <button
+            onClick={() => {
+              handleResetForm();
+              setEditingIndex(null);
+              closeInput();
+            }}
+          >
+            Cancel
+          </button>
+          <button type="submit">
+            {isEditing ? 'Update Subscription' : 'Add Subscription'}
+          </button>
         </div>
       </form>
     </section>

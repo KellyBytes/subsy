@@ -78,6 +78,13 @@ export default function AuthProvider(props) {
     await saveToFirebase(newSubscriptions);
   }
 
+  async function handleUpdateSubscription(index, updateData) {
+    const newSubscriptions = [...userData.subscriptions];
+    newSubscriptions[index] = updateData;
+    setUserData({ subscriptions: newSubscriptions });
+    await saveToFirebase(newSubscriptions);
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       try {
@@ -119,6 +126,7 @@ export default function AuthProvider(props) {
     resetPassword,
     handleAddSubscription,
     handleDeleteSubscription,
+    handleUpdateSubscription,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
