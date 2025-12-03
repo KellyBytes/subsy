@@ -33,9 +33,10 @@
   --color-compliment: "";
   --color-gradient: "";
   --color-muted: ;
-  /* --color-link: #2563eb; */
+  /* --color-link: #2563eb;
+  --color-link-transparent: rgba(37, 99, 235, 0.1); */
   --color-link: #16a34a;
-  --color-link-transparent: rgba(37, 99, 235, 0.1);
+  --color-link-transparent: #16a34a20;
 
   --color-success: "";
   --color-warning: "";
@@ -49,8 +50,10 @@
   --gradient-end: #8fdcab;
 
   --border-primary: #f1f5f9;
-  --border-secondary: #bed1e7;
-  --border-highlight: #64748b;
+  /* --border-secondary: #bed1e7;
+  --border-highlight: #64748b; */
+  --border-secondary: #9bcbaf;
+  --border-highlight: #5f8d72;
   --border-tertiary: "";
 
   --shadow-dark: "";

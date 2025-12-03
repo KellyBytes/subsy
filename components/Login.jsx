@@ -1,12 +1,16 @@
 'use client';
 
 import { useAuth } from '@/context/AuthContext';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Login() {
+  const params = useSearchParams();
+  const isReg = params.get('register');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isRegistration, setIsRegistration] = useState('');
+  const [isRegistration, setIsRegistration] = useState(isReg);
   const [error, setError] = useState(null);
   const [authenticating, setAuthenticating] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
