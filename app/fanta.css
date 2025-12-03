@@ -23,7 +23,8 @@
   --background-accent: "";
   --background-compliment: "";
   --background-gradient: "";
-  --background-muted: #f8fafc;
+  /* --background-muted: #f8fafc; */
+  --background-muted: #f3f8f5;
 
   --color-primary: #030615;
   --color-secondary: "";
@@ -32,7 +33,8 @@
   --color-compliment: "";
   --color-gradient: "";
   --color-muted: ;
-  --color-link: #2563eb;
+  /* --color-link: #2563eb; */
+  --color-link: #16a34a;
   --color-link-transparent: rgba(37, 99, 235, 0.1);
 
   --color-success: "";
@@ -41,8 +43,10 @@
   --color-info: "";
   --color-highlight: #fef9c3;
 
-  --gradient-start: #9580ff;
-  --gradient-end: #80ffea;
+  /* --gradient-start: #9580ff;
+  --gradient-end: #80ffea; */
+  --gradient-start: #16a34a;
+  --gradient-end: #8fdcab;
 
   --border-primary: #f1f5f9;
   --border-secondary: #bed1e7;

@@ -1,11 +1,17 @@
+import { useAuth } from '@/context/AuthContext';
 import { getDaysUntilNextCharge, subscriptions } from '@/utils';
 
-export default function SubscriptionsDisplay() {
+export default function SubscriptionsDisplay(props) {
+  const { handleShowInput, handleEditSubscription } = props;
+  const { handleDeleteSubscription, userData } = useAuth();
+
+  if (!userData?.subscriptions) return null;
+
   return (
     <section>
       <h2>Your Subscriptions</h2>
       <div className="card-container">
-        {subscriptions.map((sub, subIndex) => {
+        {userData.subscriptions.map((sub, subIndex) => {
           const {
             name,
             category,
@@ -44,7 +50,7 @@ export default function SubscriptionsDisplay() {
 
               <div className="sub-renewal">
                 <div>
-                  <p>Stared</p>
+                  <p>Started</p>
                   <h4>{startDate}</h4>
                 </div>
                 <div>
@@ -57,11 +63,21 @@ export default function SubscriptionsDisplay() {
               <p>{notes}</p>
 
               <div className="subscription-actions">
-                <button className="button-card">
+                <button
+                  onClick={() => {
+                    handleEditSubscription(subIndex);
+                  }}
+                  className="button-card"
+                >
                   <i className="fa-solid fa-pen-to-square"></i>
                   Edit
                 </button>
-                <button className="button-card">
+                <button
+                  onClick={() => {
+                    handleDeleteSubscription(subIndex);
+                  }}
+                  className="button-card"
+                >
                   <i className="fa-solid fa-trash"></i>
                   Delete
                 </button>
@@ -69,7 +85,10 @@ export default function SubscriptionsDisplay() {
             </div>
           );
         })}
-        <button className="button-card add-subscription">
+        <button
+          onClick={handleShowInput}
+          className="button-card add-subscription"
+        >
           <i className="fa-solid fa-plus"></i>
           <h5>Add new subscription</h5>
         </button>

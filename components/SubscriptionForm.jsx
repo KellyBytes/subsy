@@ -1,13 +1,51 @@
 'use client';
+import { useAuth } from '@/context/AuthContext';
+import { useState } from 'react';
 
-export default function SubscriptionForm() {
+export default function SubscriptionForm(props) {
+  const { onSubmit, closeInput, formData, handleChangeInput, handleResetForm } =
+    props;
+
+  const { handleAddSubscription } = useAuth();
+
+  // Move the followings to app/dashboard/page.js
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   category: 'Entertainment',
+  //   cost: '',
+  //   currency: 'CAD',
+  //   billingFrequency: 'Monthly',
+  //   nextBillingData: '',
+  //   paymentMethod: 'Credit Card',
+  //   stateDate: '',
+  //   renewalType: '',
+  //   notes: '',
+  //   status: 'Active',
+  // });
+
+  // function handleChangeInput(e) {
+  //   const newData = { ...formData, [e.target.name]: e.target.value };
+
+  //   setFormData(newData);
+  // }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    // onSubmit();
+    handleAddSubscription(formData);
+    handleResetForm();
+    closeInput();
+  }
+
   return (
     <section>
       <h2>Add a new subscription</h2>
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleFormSubmit}>
         <label>
           <span>Subscription Name</span>
           <input
+            value={formData.name}
+            onChange={handleChangeInput}
             type="text"
             name="name"
             placeholder="e.g. Netflix, Spotify, AWS Hosting"
@@ -17,7 +55,11 @@ export default function SubscriptionForm() {
 
         <label>
           <span>Category</span>
-          <select name="category">
+          <select
+            value={formData.category}
+            onChange={handleChangeInput}
+            name="category"
+          >
             {[
               'Entertainment',
               'Music',
@@ -34,6 +76,8 @@ export default function SubscriptionForm() {
         <label>
           <span>Cost</span>
           <input
+            value={formData.cost}
+            onChange={handleChangeInput}
             type="number"
             name="cost"
             step="0.01"
@@ -44,7 +88,11 @@ export default function SubscriptionForm() {
 
         <label>
           <span>Currency</span>
-          <select name="currency">
+          <select
+            value={formData.currency}
+            onChange={handleChangeInput}
+            name="currency"
+          >
             {['CAD', 'USD', 'EUR', 'GBP', 'Other'].map((cur, curIndex) => {
               return <option key={curIndex}>{cur}</option>;
             })}
@@ -53,7 +101,11 @@ export default function SubscriptionForm() {
 
         <label>
           <span>Billing Frequency</span>
-          <select name="billingFrequency">
+          <select
+            value={formData.billingFrequency}
+            onChange={handleChangeInput}
+            name="billingFrequency"
+          >
             {['Monthly', 'Yearly', 'Quarterly', 'One-time'].map(
               (billing, billingIndex) => {
                 return <option key={billingIndex}>{billing}</option>;
@@ -64,7 +116,11 @@ export default function SubscriptionForm() {
 
         <label>
           <span>Payment Method</span>
-          <select name="paymentMethod">
+          <select
+            value={formData.paymentMethod}
+            onChange={handleChangeInput}
+            name="paymentMethod"
+          >
             {[
               'Credit Card',
               'Debit Card',
@@ -79,12 +135,22 @@ export default function SubscriptionForm() {
 
         <label>
           <span>Subscription Start Date</span>
-          <input type="date" name="startDate" required />
+          <input
+            value={formData.stateDate}
+            onChange={handleChangeInput}
+            type="date"
+            name="startDate"
+            required
+          />
         </label>
 
         <label>
           <span>Status</span>
-          <select name="status">
+          <select
+            value={formData.status}
+            onChange={handleChangeInput}
+            name="status"
+          >
             {['Active', 'Paused', 'Cancelled'].map((status, statusIndex) => {
               return <option key={statusIndex}>{status}</option>;
             })}
@@ -94,13 +160,15 @@ export default function SubscriptionForm() {
         <label className="fat-column">
           <span>Notes</span>
           <textarea
+            value={formData.notes}
+            onChange={handleChangeInput}
             name="notes"
             placeholder="e.g. Shared with family, includes cloud storage"
           />
         </label>
 
         <div className="fat-column form-submit-btns">
-          <button>Cancel</button>
+          <button onClick={closeInput}>Cancel</button>
           <button type="submit">Add Subscription</button>
         </div>
       </form>

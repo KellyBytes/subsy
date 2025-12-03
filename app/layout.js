@@ -3,6 +3,7 @@ import './fanta.css';
 import Head from './Head';
 import Link from 'next/link';
 import GoTo from '@/components/GoTo';
+import AuthProvider from '@/context/AuthContext';
 
 export const metadata = {
   title: 'Subsy | The Subscription Tracker',
@@ -40,10 +41,16 @@ export default function RootLayout({ children }) {
         </div>
         <div>
           <p>
-            Facing issues? <a>Get help</a>
+            Facing issues?{' '}
+            <a href="https://forms.gle/sMaBpbDSnP7oD1aL7" target="_blank">
+              Get help
+            </a>
           </p>
           <p>
-            Suggestions for improvement? <a>Share feedback</a>
+            Suggestions for improvement?{' '}
+            <a href="https://forms.gle/rhsFW8nnXo8XMYBN7" target="_blank">
+              Share feedback
+            </a>
           </p>
           <div>
             <Link href={'/privacy'}>Privacy Policy</Link>
@@ -57,12 +64,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head />
-      <body>
-        {header}
-        <div className="full-line" />
-        <main>{children}</main>
-        {footer}
-      </body>
+      <AuthProvider>
+        <body>
+          {header}
+          <div className="full-line" />
+          <main>{children}</main>
+          {footer}
+        </body>
+      </AuthProvider>
     </html>
   );
 }

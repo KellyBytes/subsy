@@ -258,8 +258,13 @@ section > h2 {
 }
 
 .add-subscription {
-  aspect-ratio: 16 / 9;
-  -webkit-box-direction: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 4rem 1rem !important;
 }
 
 section form {
@@ -291,6 +296,20 @@ form textarea {
   grid-column: span 2;
 }
 
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.spinner {
+  color: var(--border-secondary);
+  font-size: 4rem;
+  animation: spin 1s linear infinite;
+}
+
 /* login */
 
 .login {
@@ -305,13 +324,50 @@ form textarea {
   padding: 4rem 0;
 }
 
-.login > div:last-of-type {
+/* .login > div:last-of-type {
   display: flex;
   align-items: center;
   gap: 1rem;
+} */
+
+.registration-reset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.registration,
+.reset-password {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.725rem;
+}
+
+.reset-password-form {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.reset-password-form button {
+  text-wrap: nowrap;
+}
+
+.reset-message {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--border-highlight);
 }
 
 /* footer */
+
+footer {
+  margin-top: 2rem;
+}
 
 .hard-line {
   height: 1px;
@@ -388,6 +444,21 @@ form textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 3rem;
   }
+
+  /* .registration-reset {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .registration,
+  .reset-password {
+    width: 100%;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    text-wrap: nowrap;
+  } */
+
   .footer-content {
     flex-direction: row;
   }
@@ -397,5 +468,11 @@ form textarea {
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-end;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
