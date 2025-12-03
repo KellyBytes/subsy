@@ -1,5 +1,17 @@
 import { useAuth } from '@/context/AuthContext';
 import { calculateSubscriptionMetrics, subscriptions } from '@/utils';
+import {
+  FaCheck,
+  FaCheckDouble,
+  FaStar,
+  FaBolt,
+  FaGift,
+  FaFire,
+  FaDollarSign,
+  FaFileInvoiceDollar,
+  FaChartLine,
+  FaMoneyBillWave,
+} from 'react-icons/fa';
 
 export default function SubscriptionSummary() {
   const { userData } = useAuth();
@@ -22,6 +34,16 @@ export default function SubscriptionSummary() {
     '🪼',
   ];
 
+  const icons = [
+    <FaDollarSign />,
+    <FaFileInvoiceDollar />,
+    <FaChartLine />,
+    <FaBolt />,
+    <FaStar />,
+    <FaMoneyBillWave />,
+    <FaFire />,
+  ];
+
   return (
     <section>
       <h2>Subscription Analytics</h2>
@@ -30,7 +52,7 @@ export default function SubscriptionSummary() {
           return (
             <div key={metricIndex} className="analytics-item">
               <p>
-                {emojis[metricIndex]} {metric.replaceAll('_', ' ')}
+                {icons[metricIndex]} {metric.replaceAll('_', ' ')}
               </p>
               <h4>{summary[metric]}</h4>
             </div>
